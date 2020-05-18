@@ -12,8 +12,7 @@ class AuthenticationService {
         sessionStorage.removeItem(authProperty);
     }
 
-    isUserLoggedIn() {
-        console.log("Jucaaaa")
+    isUserLoggedIn() {        
         let user = sessionStorage.getItem(authProperty);        
         if(user === null) {
             return false

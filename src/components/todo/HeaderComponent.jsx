@@ -6,8 +6,6 @@ import { withRouter } from 'react-router';
 class HeaderComponent extends Component {    
     render() {
         let isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-        console.log("HeaderComponent");
-        console.log(isUserLoggedIn);
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
