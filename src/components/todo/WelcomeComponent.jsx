@@ -7,8 +7,10 @@ class WelcomeComponent extends Component {
         super(props)
         this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
+        this.handleError = this.handleError.bind(this);
         this.state = {
-            welcomeMessage : ""
+            welcomeMessage : "",
+            errorMessage : ""
         }
     }
 
@@ -27,19 +29,25 @@ class WelcomeComponent extends Component {
                 <div>
                    {this.state.welcomeMessage}
                 </div>
+                <div>
+                   {this.state.errorMessage}
+                </div>
             </div>
         )
     }
 
     retrieveWelcomeMessage() {
-        HelloWorldService.executeHelloWorldService()
+        HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
         .then(response => this.handleSuccessfulResponse(response))
-        //.catch()
+        .catch(error => this.handleError(error))
     }
 
     handleSuccessfulResponse(response) {
-        this.setState({welcomeMessage: response.data});
+        this.setState({welcomeMessage: response.data.message});
+    }
 
+    handleError(error) {
+        this.setState({errorMessage: error.response.data.message});
     }
 }
 

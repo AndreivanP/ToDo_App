@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import TodoDataService from "../../api/todo/TodoDataService";
+import AuthenticationService from "./AuthenticationService.js"
 
 class ListTodosCompoment extends Component {
     constructor(props) {
@@ -6,12 +8,23 @@ class ListTodosCompoment extends Component {
         this.state = {
             todos:
                 [
-                    { id: 1, description: 'Learn React', done: false, targetDate: new Date() },
-                    { id: 2, description: 'Learn Xablau', done: false, targetDate: new Date() },
-                    { id: 3, description: 'Learn everything', done: false, targetDate: new Date() }
+                    // { id: 1, description: 'Learn React', done: false, targetDate: new Date() },
+                    // { id: 2, description: 'Learn Xablau', done: false, targetDate: new Date() },
+                    // { id: 3, description: 'Learn everything', done: false, targetDate: new Date() }
                 ]
         }
     }
+
+    componentDidMount() {
+        let username = AuthenticationService.getLoggedInUserName();
+        TodoDataService.retrieveAllTodos(username)
+        .then(
+            response => {
+                this.setState({todos : response.data})
+            }
+        )
+    }
+
     render() {
         return (        
             <div className="text-center">
@@ -46,21 +59,5 @@ class ListTodosCompoment extends Component {
     }
         
 }
-
-
-// function ShowInvalidCredentials(props) {    
-//     if(props.hasLoginFailed) {        
-//         return <div>Invalid Credentials</div>
-//     }
-//     return null        
-// }
-
-// function ShowLoginSuccesMessage(props) {    
-//     if(props.showSuccesMessage) {        
-//         return <div>Login Sucessful</div>
-//     }
-//     return null        
-// }
-
 
 export default ListTodosCompoment

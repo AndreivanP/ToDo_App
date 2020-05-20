@@ -52,8 +52,20 @@ class LoginComponent extends Component {
             </div>
         )
     }
-
-
 }
+
+// function ShowInvalidCredentials(props) {    
+//     if(props.hasLoginFailed) {        
+//         return <div>Invalid Credentials</div>
+//     }
+//     return null        
+// }
+
+// function ShowLoginSuccesMessage(props) {    
+//     if(props.showSuccesMessage) {        
+//         return <div>Login Sucessful</div>
+//     }
+//     return null        
+// }
 
 export default LoginComponent
