@@ -23,17 +23,14 @@ class LoginComponent extends Component {
     }
 
     loginClicked() {
-        //in28minutes, dummy        
-        if (this.state.username === 'in28minutes' && this.state.password === 'dummy') {
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-            this.props.history.push(`/welcome/${this.state.username}`);
-            // this.setState({showSuccesMessage:true})
-            // this.setState({hasLoginFailed:false})
-        } else {
-            this.setState({ showSuccesMessage: false })
-            this.setState({ hasLoginFailed: true })
-        }
-
+        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
+            .then( () => {
+                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+                this.props.history.push(`/welcome/${this.state.username}`)                
+            }).catch( () => {
+                this.setState({ showSuccesMessage: false })
+                this.setState({ hasLoginFailed: true })
+            })
     }
 
     render() {
@@ -52,8 +49,20 @@ class LoginComponent extends Component {
             </div>
         )
     }
-
-
 }
+
+// function ShowInvalidCredentials(props) {    
+//     if(props.hasLoginFailed) {        
+//         return <div>Invalid Credentials</div>
+//     }
+//     return null        
+// }
+
+// function ShowLoginSuccesMessage(props) {    
+//     if(props.showSuccesMessage) {        
+//         return <div>Login Sucessful</div>
+//     }
+//     return null        
+// }
 
 export default LoginComponent
