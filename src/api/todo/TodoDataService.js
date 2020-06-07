@@ -1,8 +1,10 @@
 import axios from "axios"
+import AuthenticationService from "../../components/todo/AuthenticationService";
 
 class TodoDataService {
-    retrieveAllTodos(name) {
-        return axios.get(`http://localhost:8080/users/${name}/todos`);
+    retrieveAllTodos(username, password) {
+        return axios.get(`http://localhost:8080/users/${username}/todos`, 
+            {headers: {authorization: AuthenticationService.createBasicAuthToken(username, password)}});
     }
 
     deleteTodo(name, id) {

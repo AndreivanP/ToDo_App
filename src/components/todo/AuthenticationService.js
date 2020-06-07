@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const authProperty = 'authenticatedUser'; 
+const passProperty = 'passwordUser';
 
 class AuthenticationService {   
 
@@ -14,12 +15,14 @@ class AuthenticationService {
     }
 
     registerSuccessfulLogin(username, password) {           
-        sessionStorage.setItem(authProperty, username); 
+        sessionStorage.setItem(authProperty, username);
+        sessionStorage.setItem(passProperty, password); 
         this.setupAxiosInterceptors(this.createBasicAuthToken(username, password));
     }
 
     logout() {
         sessionStorage.removeItem(authProperty);
+        sessionStorage.removeItem(passProperty);
     }
 
     isUserLoggedIn() {        
@@ -37,6 +40,15 @@ class AuthenticationService {
             return ""
         } else {
             return user
+        }        
+    }
+
+    getLoggedInPassword() {        
+        let password = sessionStorage.getItem(passProperty);        
+        if(password === null) {
+            return ""
+        } else {
+            return password
         }        
     }
 
