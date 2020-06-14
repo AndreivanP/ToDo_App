@@ -5,7 +5,7 @@ class LoginComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            username: 'in28minutes',
+            username: 'Andreivan',
             password: '',
             hasLoginFailed: false,
             showSuccesMessage: false

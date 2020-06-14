@@ -58,8 +58,7 @@ class ListTodosCompoment extends Component {
                 <div >
                     <table className="table">
                         <thead>
-                            <tr>
-                                <th>ID</th>
+                            <tr>                                
                                 <th>Description</th>
                                 <th>Is Completed?</th>
                                 <th>Target Date</th>
@@ -71,8 +70,7 @@ class ListTodosCompoment extends Component {
                             {
                                 this.state.todos.map(
                                     todo =>
-                                        <tr key={todo.id}>
-                                            <td>{todo.id}</td>
+                                        <tr key={todo.id}>                                            
                                             <td>{todo.description}</td>
                                             <td>{todo.done.toString()}</td>
                                             <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
